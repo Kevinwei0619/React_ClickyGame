@@ -1,0 +1,17 @@
+.backgroundForJum{
+
+    background-image: url("http://zjimg.5054399.com/allimg/170922/23_170922142409_1.jpg");
+    height: 400px; /* You must set a specified height */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: 100% 100%;
+
+}
+
+.text{
+    font-size: 15px;
+    color: black;
+    font:bold;
+    margin-top: 90px;
+    background-color:wheat;
+}
