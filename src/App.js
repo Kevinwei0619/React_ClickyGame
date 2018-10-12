@@ -3,8 +3,11 @@ import "./App.css";
 import Nav from "./components/Nav";
 import Jumnotron from "./components/Jumbotron";
 import ClickyCard from "./components/ClickyCard";
+import Footer from "./components/Footer/Index";
 import friends from "./friends.json";
+
 import { Row, Col, Grid } from "react-bootstrap";
+
 // import { uptime } from "os";
 
 // from this https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -41,23 +44,59 @@ class App extends Component {
     // console.log("first shuffle array : ", this.state.friends);
   }
 
-  // handleClickevent = id => {
-  //   console.log("what is this ID for:" , id);
-  //   this.state.friends.map((item) => {
-  //     if(item.id === id){
-  //       if(!(item.clicked === false)){
-  //           item.clicked = true;
 
+  gameOver = () => {
 
-  //       }else{
-        
-  //       }
-  //     }
+    var restArray = this.state.friends.map((item , i) => {
+      item.clicked = false;
+      return restArray;
+    });
+    
+    this.setState({
+      friends: restArray,
+      currentScore: 0,
+    })
+    return true;
+  };
 
-  //     return item;
-  //   }
-  //   );
-  // };
+  addSomeScore = () =>{
+    if(this.state.currentScore === this.state.topScore){
+      this.setState({
+        currentScore: this.state.currentScore + 1,
+        topScore: this.state.topScore + 1,
+      })
+
+    }else if(this.state.currentScore < this.state.topScore){
+      this.setState({
+        currentScore: this.state.currentScore + 1,
+      })
+    }
+    
+    return true;
+  }
+
+  handleClickevent = id => {
+    console.log("what is this ID for:" , id);
+    var newArray = this.state.friends.map((item , i ) => {
+      // console.log("this is item: " , item);
+      if(item.id === id){
+        if(item.clicked === true){
+          alert("you already clicked!!");
+          this.gameOver();
+        }else{
+          item.clicked = true;
+          this.addSomeScore();
+        }
+      }
+
+      return item;
+    });
+    this.setState({
+      friends:shuffle(newArray)
+    })
+
+    console.log("the new array: " , this.state.friends);
+  };
 
   render() {
     return (
@@ -71,12 +110,12 @@ class App extends Component {
 
         <Grid>
           <Row className="show-grid">
-            {this.state.friends.map((friend) => (
-              <Col xs={6} md={3}>
+            {this.state.friends.map((friend , i) => (
+              <Col xs={6} md={3} key={i}>
                 <ClickyCard
                   name={friend.name}
                   image={friend.image}
-                  key={friend.id}
+                  key={i}
                   id={friend.id}
                   handleClickevent={this.handleClickevent}
                 />
@@ -84,6 +123,7 @@ class App extends Component {
             ))}
           </Row>
         </Grid>
+        <Footer />
       </div>
     );
   }

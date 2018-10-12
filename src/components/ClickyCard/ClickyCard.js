@@ -7,19 +7,45 @@ const style = {
     backgroundColor: 'blue'
 };
 
-const ClickyCard = props => {
-    return (
-        <div className="card text-center mag"  >
-            <div className="card-body" style={style} >
-                <img
-                    className="clickImage"
-                    alt={props.name}
-                    src={props.image}
-                    key={props.id}
-                    onClick={() => props.handleClickevent(props.id)}/>
+
+export default class ClickyCard extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state =({
+            test:1
+        });
+    
+    };
+
+    render(){
+
+
+    // console.log(this.props.id);
+    
+        return (
+            <div className="card text-center mag"  key={this.props.id}>
+                <div className="card-body" style={style} >
+                    <img
+                        className="clickImage"
+                        alt={this.props.name}
+                        src={this.props.image}
+                        key={this.props.id}
+                        onClick={() => this.props.handleClickevent(this.props.id)}/>
+                </div>
             </div>
-        </div>
-    )
+        )
+
+    }
+
+
+    // Home.propTypes ={
+    //     name:this.propTypes.string,
+    //     handleClickevent:this.propTypes.func
+    // }
+
 }
 
-export default ClickyCard;
+
+
+
+// export default ClickyCard;
