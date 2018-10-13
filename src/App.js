@@ -55,7 +55,10 @@ class App extends Component {
     this.setState({
       friends: restArray,
       currentScore: 0,
+      navCenter: "Click an Image to begin!!",
     })
+
+    alert("you have already clicked!! Game Over!!!");
     return true;
   };
 
@@ -81,7 +84,6 @@ class App extends Component {
       // console.log("this is item: " , item);
       if(item.id === id){
         if(item.clicked === true){
-          alert("you already clicked!!");
           this.gameOver();
         }else{
           item.clicked = true;
@@ -92,8 +94,9 @@ class App extends Component {
       return item;
     });
     this.setState({
-      friends:shuffle(newArray)
-    })
+      friends:shuffle(newArray),
+      navCenter:"You guessed correctly!!"
+    });
 
     console.log("the new array: " , this.state.friends);
   };
